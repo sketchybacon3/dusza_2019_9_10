@@ -3,10 +3,10 @@ def get_vehicle_name(vehicle_type):
     return vehicle_names[vehicle_type]
 
 def get_max_speed_for_vehicle_type(vehicle_type):
-    vehicle_speeds = dict([('sz', 130), ('m', 130), ('b', 100), ('t', 80)])
+    vehicle_speeds = dict([('sz', 130), ('m', 130), ('b', 100), ('t', 80), ('mk', 1000)])
     return vehicle_speeds[vehicle_type]
 
-def print_result(speed_measurement, display_country_code, display_license_plate, display_location, display_vehicle_type, display_speed, display_time):
+def print_result(speed_measurement, display_country_code, display_license_plate, display_location, display_vehicle_type, display_speed, display_time, display_exceed):
     str_result = ""
 
     for i in range(len(speed_measurement)):
@@ -28,6 +28,14 @@ def print_result(speed_measurement, display_country_code, display_license_plate,
 
         if display_time:
             str_result += "時刻：" + speed_measurement[i].get_time() + ", "
+
+        if display_exceed:
+            if int(speed_measurement[i].get_measured_speed()) > get_max_speed_for_vehicle_type(speed_measurement[i].get_vehicle_type()):
+                str_result += "制限速度を{0}km/hで超える".format(int(speed_measurement[i].get_measured_speed()) - get_max_speed_for_vehicle_type(speed_measurement[i].get_vehicle_type()))
+                str_result += ", "
+            else:
+                str_result += "車が制限速度を超えませんでした, "
+
 
         str_result = str_result[0:-2]  # 最後の２つ文字を削除する
         str_result += "\n===================================\n"
