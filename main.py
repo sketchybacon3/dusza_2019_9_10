@@ -16,12 +16,12 @@ def task2(checkpoint_data):
 
     results = cars_over_limit + buses_over_limit + trucks_over_limit
 
-    functions.print_result(results, True, True, False, True, True, False, False)
+    functions.print_result(results, True, True, False, True, True, False, False, False)
 
 def task3(checkpoint_data):
     print(checkpoint_data.get_max_speed_at_location("A"))
     results = checkpoint_data.get_vehicles_over_limit("A")
-    functions.print_result(results, True, True, False, True, False, True, True)
+    functions.print_result(results, True, True, False, True, False, True, True, False)
 
 def task4(checkpoint_data):
     results = checkpoint_data.get_vehicles_by_country_code("H")
@@ -29,7 +29,15 @@ def task4(checkpoint_data):
 
 def task5(checkpoint_data):
     results = checkpoint_data.limited_speed_between_time("C", "09:00:00", "13:00:00", 110, "sz")
-    functions.print_result(results, True, True, False, False, True, False, False)
+    functions.print_result(results, True, True, False, False, True, False, False, False)
+
+def task6(checkpoint_data, cam_locs):
+    pass
+
+def task7(checkpoint_data):
+    results = checkpoint_data.get_cars_between_all_points()
+    functions.print_result(results, True, True, False, False, False, False, False, False)
+
 
 def main():
     data_source = input("データソースを入力してください")
@@ -43,6 +51,8 @@ def main():
     task3(checkpoint_data)
     task4(checkpoint_data)
     task5(checkpoint_data)
+    task7(checkpoint_data)
+
 
 if __name__ == '__main__':
     main()

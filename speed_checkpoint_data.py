@@ -1,3 +1,4 @@
+import datetime
 from functions import functions
 from data_structures import timestamp
 
@@ -43,6 +44,14 @@ class SpeedCheckpointData:
 
         return already_checked_vehicles
 
+    def get_vehicles_by_plate(self, license_plate):
+        arr = []
+        for i in range(len(self.data)):
+            if self.data[i].get_license_plate() == license_plate:
+                arr.append(self.data[i])
+
+        return arr
+
     def limited_speed_between_time(self, location, time_start, time_end, changed_speed_limit, type_of_vehicle):
         start_time = timestamp.TimeStamp(time_start)
         end_time = timestamp.TimeStamp(time_end)
@@ -58,5 +67,24 @@ class SpeedCheckpointData:
                     arr.append(self.data[i])
         return arr
 
+    def get_cars_between_all_points(self):
+        data_arr = self.data
+        arr = []
+        for i in range(len(data_arr)):
+            for k in range(len(data_arr)):
+                for l in range(len(data_arr)):
+                    license_a = data_arr[i].get_license_plate()
+                    license_b = data_arr[k].get_license_plate()
+                    license_c = data_arr[l].get_license_plate()
 
+                    if license_a == license_b and license_b == license_c:
+                        if data_arr[i].get_location() == "A" and data_arr[k].get_location() == "B" and data_arr[l].get_location() == "C":
+                            has_vehicle_added = False
 
+                            for x in range(len(arr)):
+                                if arr[x].get_license_plate() == data_arr[i].get_license_plate():
+                                    has_vehicle_added = True
+                            if has_vehicle_added == False:
+                                arr.append(data_arr[i])
+
+        return arr
