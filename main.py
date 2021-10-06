@@ -43,6 +43,9 @@ def task8(checkpoint_data):
     license_plate = input("ナンバープレートを入力してください")
     checkpoint_data.get_vehicles_abusing_license_plate(license_plate)
 
+def task9(checkpoint_data):
+    results = checkpoint_data.get_invalid_license_plates()
+    functions.print_result(results, False, True, False, False, False, False, False, False)
 
 def main():
     data_source = input("データソースを入力してください")
@@ -58,6 +61,7 @@ def main():
     task5(checkpoint_data)
     task7(checkpoint_data)
     task8(checkpoint_data)
+    task9(checkpoint_data)
 
 if __name__ == '__main__':
     main()

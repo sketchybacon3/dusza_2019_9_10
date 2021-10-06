@@ -84,7 +84,7 @@ class SpeedCheckpointData:
                             for x in range(len(arr)):
                                 if arr[x].get_license_plate() == data_arr[i].get_license_plate():
                                     has_vehicle_added = True
-                            if has_vehicle_added == False:
+                            if not has_vehicle_added:
                                 arr.append(data_arr[i])
 
         return arr
@@ -103,3 +103,11 @@ class SpeedCheckpointData:
             print("制限速度をこえていませんでした。")
         else:
             functions.print_result(arr, True, True, True, True, True, False, True, False)
+
+    def get_invalid_license_plates(self):
+        arr = []
+        for i in range(len(self.data)):
+            if not functions.verify_plate(self.data[i].get_license_plate()):
+                arr.append(self.data[i])
+
+        return arr

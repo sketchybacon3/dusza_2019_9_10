@@ -37,10 +37,30 @@ def print_result(speed_measurement, display_country_code, display_license_plate,
             else:
                 str_result += "車が制限速度を超えませんでした, "
 
-        if no_newline == False:
+        if not no_newline:
             str_result = str_result[0:-2]  # 最後の２つ文字を削除する
-            str_result += "\n===================================\n"
-
-
+            str_result += "\n===================================\n" \
 
     print(str_result)
+
+
+
+
+
+def verify_plate(license_plate):
+    is_valid = True
+    for i in range(0, len(license_plate)-4):
+        if not license_plate[i].isalpha():
+            is_valid = False
+    if license_plate[3] != "-":
+        is_valid = False
+
+    for i in range(4, len(license_plate)):
+        if not license_plate[i].isnumeric():
+            is_valid == False
+    return is_valid
+
+
+
+
+
