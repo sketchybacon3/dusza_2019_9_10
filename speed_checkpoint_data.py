@@ -88,3 +88,18 @@ class SpeedCheckpointData:
                                 arr.append(data_arr[i])
 
         return arr
+
+    def get_vehicles_abusing_license_plate(self, license_plate):
+        arr = []
+        vehicles_with_that_plate = self.get_vehicles_by_plate(license_plate.upper())
+        if len(vehicles_with_that_plate) == 0:
+            print("そんなナンバープレートはありません。")
+            exit()
+        for i in range(len(vehicles_with_that_plate)):
+            if int(vehicles_with_that_plate[i].get_measured_speed()) > functions.get_max_speed_for_vehicle_type(vehicles_with_that_plate[i].get_vehicle_type()):
+                arr.append(vehicles_with_that_plate[i])
+
+        if len(arr) == 0:
+            print("制限速度をこえていませんでした。")
+        else:
+            functions.print_result(arr, True, True, True, True, True, False, True, False)
